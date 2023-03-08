@@ -32,7 +32,18 @@ describe("Example test with viem", function () {
       address: a,
       ...A,
       functionName: "returnsString", // Proper type here
-      args: ["hello"],
+      args: ["hello"], // <----------------------------------------------- This one works
     }); // s has its proper type
+
+
+    
+    const s2 = await viem.publicClient.readContract({
+      address: a,
+      ...A,
+      functionName: "returnsString", // Proper type here
+      args: [], // <----------------------------------------------- This one doesn't
+    });
+
+    console.log({s, s2})
   });
 });

@@ -9,4 +9,8 @@ contract A {
     ) public pure returns (string memory) {
         return s;
     }
+
+    function returnsString() public pure returns (string memory) {
+        return "none";
+    }
 }
