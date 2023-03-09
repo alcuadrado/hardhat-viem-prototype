@@ -1,12 +1,15 @@
-import { viem } from "hardhat";
+import { viem, artifacts } from "hardhat";
 import { getAccount } from "viem";
 
-import { A } from "../artifacts/contracts/A.sol";
+// This still works
+// import { A } from "../artifacts/contracts/A.sol";
 
 describe("Example test with viem", function () {
   it("Should infer the contract type", async function () {
+    const A = await artifacts.readArtifact("A");
+
     const [deployer] = await viem.walletClient.getAddresses();
-    const deployerAccount = await getAccount(deployer); // Not clear why i need to import this directly and it's not available in the client
+    const deployerAccount = await getAccount(deployer);
 
     const deploymentTx = await viem.walletClient.deployContract({
       ...A,
@@ -22,7 +25,7 @@ describe("Example test with viem", function () {
     const tx = await viem.walletClient.writeContract({
       address: a,
       ...A,
-      functionName: "writeANumber", // Proper type here
+      functionName: "writeANumber",
       args: [1n], // Proper type here
       account: deployerAccount,
     });
@@ -32,18 +35,9 @@ describe("Example test with viem", function () {
       address: a,
       ...A,
       functionName: "returnsString", // Proper type here
-      args: ["hello"], // <----------------------------------------------- This one works
+      args: ["hello"], // Proper type here
     }); // s has its proper type
 
-
-    
-    const s2 = await viem.publicClient.readContract({
-      address: a,
-      ...A,
-      functionName: "returnsString", // Proper type here
-      args: [], // <----------------------------------------------- This one doesn't
-    });
-
-    console.log({s, s2})
+    console.log({ s });
   });
 });
