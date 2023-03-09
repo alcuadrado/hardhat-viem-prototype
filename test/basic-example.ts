@@ -1,8 +1,10 @@
 import { viem, artifacts } from "hardhat";
 import { getAccount } from "viem";
 
-// This still works
+// There are three ways of importing artifacts to work well with viem:
 // import { A } from "../artifacts/contracts/A.sol";
+// const A = await hre.artifacts.readArtifact("A");
+// const A = hre.artifacts.readArtifactSync("A");
 
 describe("Example test with viem", function () {
   it("Should infer the contract type", async function () {
@@ -39,5 +41,13 @@ describe("Example test with viem", function () {
     }); // s has its proper type
 
     console.log({ s });
+  });
+
+  it("Should support repeated contract names", async function () {
+    // const Repetated = await artifacts.readArtifact("Repeated"); // Type: never
+
+    // These work
+    const RepetatedA = await artifacts.readArtifact("contracts/A.sol:Repeated");
+    const RepetatedB = await artifacts.readArtifact("contracts/B.sol:Repeated");
   });
 });

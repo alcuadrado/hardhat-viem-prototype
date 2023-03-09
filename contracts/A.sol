@@ -14,3 +14,7 @@ contract A {
         return s;
     }
 }
+
+contract Repeated {
+    function write2(uint _i) public {}
+}
