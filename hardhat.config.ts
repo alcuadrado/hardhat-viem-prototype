@@ -101,6 +101,9 @@ declare module "hardhat/types/artifacts" {
   return res;
 });
 
+// TODO: obsolete `artifacts.d.ts` and `index.d.ts` aren't removed
+// TODO: contract name clashes are not handled
+
 // This section adds a property `viem` with the different clients to hardhat
 
 import "hardhat/types/runtime";
