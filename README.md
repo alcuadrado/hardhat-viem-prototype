@@ -8,8 +8,8 @@ Take a look at `test/basic-example.ts`.
 
 ## TODO
 
-[] How should we setup `chain` in the clients?
-[] How should we setup `mode` in the `TestClient`
-[] Can we avoid regenerating `artifacts.d.ts` every time compile is run?
+* [ ] How should we setup `chain` in the clients?
+* [ ] How should we setup `mode` in the `TestClient`
+* [ ] Can we avoid regenerating `artifacts.d.ts` every time compile is run?
 
 The reason the first two are unclear is that Hardhat's initialization is sync, and we don't know to which chain we are connected to.
