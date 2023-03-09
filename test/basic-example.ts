@@ -7,18 +7,17 @@ import { getAccount } from "viem";
 // const A = hre.artifacts.readArtifactSync("A");
 
 describe("Example test with viem", function () {
-  it("Should infer the contract type", async function () {
+  it("Should infer every type correctly", async function () {
     const A = await artifacts.readArtifact("A");
 
     const [deployer] = await viem.walletClient.getAddresses();
     const deployerAccount = await getAccount(deployer);
 
     const deploymentTx = await viem.walletClient.deployContract({
-      ...A,
+      ...A, // Shorthand syntax instead of using A.abi and A.bytecode
       account: deployerAccount,
     });
 
-    // This is pretty verbose, maybe a helper?
     const deploymentReceipt = await viem.publicClient.getTransactionReceipt({
       hash: deploymentTx,
     });
@@ -28,17 +27,16 @@ describe("Example test with viem", function () {
       address: a,
       ...A,
       functionName: "writeANumber",
-      args: [1n], // Proper type here
+      args: [1n],
       account: deployerAccount,
     });
 
-    // Having to switch between clients can be confusing
     const s = await viem.publicClient.readContract({
       address: a,
       ...A,
-      functionName: "returnsString", // Proper type here
-      args: ["hello"], // Proper type here
-    }); // s has its proper type
+      functionName: "returnsString",
+      args: ["hello"],
+    });
 
     console.log({ s });
   });
